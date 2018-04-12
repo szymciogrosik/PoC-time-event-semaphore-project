@@ -21,7 +21,7 @@ import dissimlab.simcore.SimControlException;
 
 public class Smo extends BasicSimObj
 {
-    private LinkedList <Zgloszenie> kolejka;
+    private Kolejka kolejka;
 	private boolean wolne = true;
     public RozpocznijObsluge rozpocznijObsluge;
     public ZakonczObsluge zakonczObsluge;
@@ -31,33 +31,33 @@ public class Smo extends BasicSimObj
     public Smo() throws SimControlException
     {
         // Utworzenie wewnętrznej listy w kolejce
-        kolejka = new LinkedList <Zgloszenie>();
+        kolejka = new Kolejka();
     }
 
     // Wstawienie zgłoszenia do kolejki
     public int dodaj(Zgloszenie zgl)
     {
-        kolejka.add(zgl);
-        return kolejka.size();
+        kolejka.dodaj(zgl);
+        return kolejka.getSize();
     }
 
     // Pobranie zgłoszenia z kolejki
     public Zgloszenie usun()
     {
-    	Zgloszenie zgl = (Zgloszenie) kolejka.removeFirst();
+    	Zgloszenie zgl = (Zgloszenie) kolejka.usunPierwszy();
         return zgl;
     }
 
     // Pobranie zgłoszenia z kolejki
     public boolean usunWskazany(Zgloszenie zgl)
     {
-    	Boolean b= kolejka.remove(zgl);
+    	Boolean b= kolejka.usunWskazany(zgl);
         return b;
     }
     
     public int liczbaZgl()
     {
-        return kolejka.size();
+        return kolejka.getSize();
     }
 
 	public boolean isWolne() {

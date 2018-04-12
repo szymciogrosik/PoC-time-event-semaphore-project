@@ -22,6 +22,7 @@ public class Zgloszenie extends BasicSimObj
     StartNiecierpliwienia startNiecierpliwienia;
     public KoniecNiecierpliwienia koniecNiecierpliwosci;
     public Smo smo;
+    private int priorytet;
     
 
 	public Zgloszenie(double Czas, Smo smo) throws SimControlException
@@ -52,4 +53,11 @@ public class Zgloszenie extends BasicSimObj
 		return tenNr;
 	}
 
+	public int getPriorytet() {
+		return priorytet;
+	}
+
+	public void setPriorytet(int priorytet) {
+		this.priorytet = priorytet;
+	}
 }
