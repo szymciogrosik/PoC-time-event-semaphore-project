@@ -1,16 +1,16 @@
 package dissimlab.simcore;
 
-import timeSemaphore.Zdarzenie;
+import timeSemaphore.ZdarzenieOtwierajace;
 
 public class TimeSimEventSemaphore extends SimEventSemaphore {
 
     private double dt;
-    private Zdarzenie zdarzenie;
+    private ZdarzenieOtwierajace zdarzenieOtwierajace;
 
     public TimeSimEventSemaphore(String name, long dt,  boolean isRepeated) throws SimControlException {
         super.setName(name);
         this.dt = dt;
-        zdarzenie = new Zdarzenie(this, isRepeated);
+        zdarzenieOtwierajace = new ZdarzenieOtwierajace(this, isRepeated);
     }
 
     @Override

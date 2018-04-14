@@ -7,7 +7,7 @@ import dissimlab.simcore.SimParameters.SimDateField;
 import dissimlab.simcore.TimeSimEventSemaphore;
 
 /**
- * Description: Zdarzenie generatora zgłoszeń. Tworzy obiekt - zgłoszenie co losowy czas.
+ * Description: ZdarzenieOtwierajace generatora zgłoszeń. Tworzy obiekt - zgłoszenie co losowy czas.
  * 
  * @author Dariusz Pierzchala
 

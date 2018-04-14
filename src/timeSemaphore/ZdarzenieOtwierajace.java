@@ -1,20 +1,18 @@
 package timeSemaphore;
 
-import dissimlab.random.SimGenerator;
 import dissimlab.simcore.BasicSimEvent;
 import dissimlab.simcore.SimControlException;
-import dissimlab.simcore.SimParameters;
 import dissimlab.simcore.TimeSimEventSemaphore;
 
-public class Zdarzenie extends BasicSimEvent<Otoczenie, Zgloszenie> {
+public class ZdarzenieOtwierajace extends BasicSimEvent<Otoczenie, Zgloszenie> {
 
     private TimeSimEventSemaphore semaphore;
-    private boolean isReppeated;
+    private boolean isRepeatable;
 
-    public Zdarzenie(TimeSimEventSemaphore semaphore, boolean isRepeated) throws SimControlException {
+    public ZdarzenieOtwierajace(TimeSimEventSemaphore semaphore, boolean isRepeated) throws SimControlException {
         super(semaphore.getDt());
         this.semaphore = semaphore;
-        this.isReppeated = isRepeated;
+        this.isRepeatable = isRepeated;
     }
 
     @Override
@@ -24,7 +22,7 @@ public class Zdarzenie extends BasicSimEvent<Otoczenie, Zgloszenie> {
         semaphore.open();
         System.out.println("Otwarto semafor. Liczba zdgłoszeń po otwarciu: " +      semaphore.getSizeOfSemafor() + " ||| " + semaphore.getName());
 
-        if(isReppeated)
+        if(isRepeatable)
             setRepetitionPeriod(semaphore.getDt());
     }
 
