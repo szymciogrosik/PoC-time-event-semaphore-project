@@ -20,7 +20,7 @@ public class AppSMO {
 			SimManager model = SimManager.getInstance();
 
 			//Semafor
-			TimeSimEventSemaphore semaphore = new TimeSimEventSemaphore("Semafor czasowy.", 10, false);
+			TimeSimEventSemaphore semaphore = new TimeSimEventSemaphore("Semafor czasowy.", 10, true);
 
 			// Utworzenie otoczenia
 			Otoczenie generatorZgl = new Otoczenie(semaphore);

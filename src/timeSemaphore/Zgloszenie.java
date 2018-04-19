@@ -13,13 +13,10 @@ import dissimlab.simcore.SimControlException;
 
 public class Zgloszenie extends BasicSimObj
 {
-    double czasOdniesienia;
-    static int nr = 0;
-    int tenNr;
+    private static int nr = 0;
+    private int tenNr;
 
-	public Zgloszenie(double Czas) throws SimControlException
-    {
-        czasOdniesienia = Czas;
+	public Zgloszenie() {
         setTenNr();
     }
 

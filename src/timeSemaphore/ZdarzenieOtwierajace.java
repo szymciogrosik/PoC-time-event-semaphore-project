@@ -27,10 +27,10 @@ public class ZdarzenieOtwierajace extends BasicSimEvent<Otoczenie, Zgloszenie> {
     }
 
     @Override
-    protected void onTermination() throws SimControlException { }
+    protected void onTermination() { }
 
     @Override
-    protected void onInterruption() throws SimControlException { }
+    protected void onInterruption() { }
 
     @Override
     public Object getEventParams() {

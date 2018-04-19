@@ -45,7 +45,7 @@ public class Zglaszaj extends BasicSimEvent<Otoczenie, Object>
 	protected void stateChange() throws SimControlException {
         parent = getSimObj();
 
-        Zgloszenie zgl = new Zgloszenie(simTime());
+        Zgloszenie zgl = new Zgloszenie();
         System.out.println(simTime()+" - "+simDate(SimDateField.HOUR24)+" - "+simDate(SimDateField.MINUTE)+" - "+simDate(SimDateField.SECOND)+" - "+simDate(SimDateField.MILLISECOND)+": Otoczenie - Utworzono nowe zgl. nr: " + zgl.getTenNr());
 
 		new Zglaszaj(parent, zgl, parent.getSemaphore());
@@ -54,7 +54,6 @@ public class Zglaszaj extends BasicSimEvent<Otoczenie, Object>
 		// Wygeneruj czas do kolejnego zgłoszenia
         double odstep = generator.normal(5.0, 1.0);
         setRepetitionPeriod(odstep);
-        //alternatywnie: parent.zglaszaj = new Zglaszaj(parent, odstep);
 	}
 
 	@Override
