@@ -13,11 +13,6 @@ public class TimeSimEventSemaphore extends SimEventSemaphore {
         zdarzenieOtwierajace = new ZdarzenieOtwierajace(this, isRepeated);
     }
 
-    @Override
-    public void open() throws SimControlException {
-        super.open();
-    }
-
     public int getSizeOfSemafor() {
         return super.getSimConditionalStChngList().size();
     }
