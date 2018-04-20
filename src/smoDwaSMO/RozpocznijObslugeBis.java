@@ -55,6 +55,7 @@ public class RozpocznijObslugeBis extends BasicSimEvent<SmoBis, Zgloszenie>
                     System.out.println(simTime()+" - "+simDate(SimDateField.HOUR24)+" - "+simDate(SimDateField.MINUTE)+" - "+simDate(SimDateField.SECOND)+" - "+simDate(SimDateField.MILLISECOND)+": SMOBis- otwarcie semafora - zwolnienie: " + smoParent.getSemafor().readFirstBlocked().toString());					
 				} catch (Exception e) {
 				}
+				System.out.printf("Otwarto semafor. \n" + smoParent.getSemafor().numberOfBlocked()+ "\n\n");
         		smoParent.getSemafor().open();
         	}
         	// Wygeneruj czas obsługi

@@ -1,23 +1,21 @@
 package dissimlab.simcore;
 
-import timeSemaphore.ZdarzenieOtwierajace;
+import timeSemaphore.Otoczenie;
 
 public class TimeSimEventSemaphore extends SimEventSemaphore {
 
-    private double dt;
-    private ZdarzenieOtwierajace zdarzenieOtwierajace;
-
-    public TimeSimEventSemaphore(String name, long dt,  boolean isRepeated) throws SimControlException {
+    public TimeSimEventSemaphore(Otoczenie parent, String name, long dt, boolean isRepeated) throws SimControlException {
         super.setName(name);
-        this.dt = dt;
-        zdarzenieOtwierajace = new ZdarzenieOtwierajace(this, isRepeated);
+        if(isRepeated)
+            new ZdarzenieOtwierajace(parent, this, dt);
+        else
+            new ZdarzenieOtwierajace(this, dt);
     }
 
-    public double getDt() {
-        return dt;
-    }
-
-    public void setDt(double dt) {
-        this.dt = dt;
+    @Override
+    public void open() {
+        while (!super.getSimConditionalStChngList().isEmpty()){
+            this.removeFirstState();
+        }
     }
 }
