@@ -18,9 +18,9 @@ public class ZdarzenieOtwierajace extends BasicSimEvent<Otoczenie, Zgloszenie> {
     @Override
     protected void stateChange() throws SimControlException {
 
-        System.out.println("Otwarto semafor. Liczba zdgłoszeń przed otwarciem: " +  semaphore.getSizeOfSemafor() + " ||| " + semaphore.getName());
+        System.out.println("Otwarto semafor. Liczba zdgłoszeń przed otwarciem: " +  semaphore.numberOfBlocked() + " ||| " + semaphore.getName());
         semaphore.open();
-        System.out.println("Otwarto semafor. Liczba zdgłoszeń po otwarciu: " +      semaphore.getSizeOfSemafor() + " ||| " + semaphore.getName());
+        System.out.println("Otwarto semafor. Liczba zdgłoszeń po otwarciu: " +      semaphore.numberOfBlocked() + " ||| " + semaphore.getName());
 
         if(isRepeatable)
             setRepetitionPeriod(semaphore.getDt());
