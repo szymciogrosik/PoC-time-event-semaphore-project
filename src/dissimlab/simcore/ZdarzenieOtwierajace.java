@@ -21,15 +21,13 @@ public class ZdarzenieOtwierajace extends BasicSimEvent<Otoczenie, Zgloszenie> {
     }
 
     @Override
-    protected void stateChange() throws SimControlException {
+    protected void stateChange() {
         System.out.println("Otwarto semafor. Liczba zdgłoszeń przed otwarciem: " +  semaphore.numberOfBlocked() + " ||| " + semaphore.getName());
 
         semaphore.open();
 
         System.out.println("Otwarto semafor. Liczba zdgłoszeń po otwarciu: " +      semaphore.numberOfBlocked() + " ||| " + semaphore.getName());
     }
-
-
 
     @Override
     protected void onTermination() { }
