@@ -9,14 +9,11 @@ import dissimlab.simcore.TimeSimEventSemaphore;
 import java.util.concurrent.Semaphore;
 
 public class Otoczenie extends BasicSimObj {
-    private Zglaszaj zglaszaj;
     private TimeSimEventSemaphore semaphore;
 
-    public Otoczenie(TimeSimEventSemaphore semaphore) throws SimControlException {
-    	// Przypisywanie semafora
-		this.semaphore = semaphore;
+    public Otoczenie() throws SimControlException {
         // Powołanie instancji pierwszego zdarzenia
-    	zglaszaj = new Zglaszaj(this, 0.0);
+    	new Zglaszaj(this, 0.0);
 	}
 
 	@Override

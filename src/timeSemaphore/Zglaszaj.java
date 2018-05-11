@@ -28,18 +28,6 @@ public class Zglaszaj extends BasicSimEvent<Otoczenie, Object>
 		super(parent, semaphore, zgl);
 		generator = new SimGenerator();
 	}
-    
-	@Override
-	protected void onInterruption() throws SimControlException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void onTermination() throws SimControlException {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	protected void stateChange() throws SimControlException {
@@ -54,6 +42,18 @@ public class Zglaszaj extends BasicSimEvent<Otoczenie, Object>
 		// Wygeneruj czas do kolejnego zgłoszenia
         double odstep = generator.normal(5.0, 1.0);
         setRepetitionPeriod(odstep);
+	}
+
+	@Override
+	protected void onInterruption() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void onTermination() {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override

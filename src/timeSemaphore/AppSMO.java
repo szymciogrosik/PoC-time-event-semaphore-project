@@ -8,28 +8,20 @@ package timeSemaphore;
  * Wersja testowa.
  */
 
-import dissimlab.simcore.SimControlEvent;
-import dissimlab.simcore.SimControlException;
-import dissimlab.simcore.SimManager;
+import dissimlab.simcore.*;
 import dissimlab.simcore.SimParameters.SimControlStatus;
-import dissimlab.simcore.TimeSimEventSemaphore;
 
 public class AppSMO {
 	public static void main(String[] args) {
 		try {
 			SimManager model = SimManager.getInstance();
 
-			//Semafor
-			TimeSimEventSemaphore semaphore = new TimeSimEventSemaphore("Semafor czasowy.", 10, true);
-
 			// Utworzenie otoczenia
-			Otoczenie generatorZgl = new Otoczenie(semaphore);
+			Otoczenie generatorZgl = new Otoczenie();
+			TimeSimEventSemaphore semaphore = new TimeSimEventSemaphore(generatorZgl, "Semafor czasowy.", 10, false);
+			generatorZgl.setSemaphore(semaphore);
 
-			// Dwa sposoby zaplanowanego końca symulacji
-			//model.setEndSimTime(10000);
-			// lub
 			SimControlEvent stopEvent = new SimControlEvent(50.0, SimControlStatus.STOPSIMULATION);
-			// Uruchomienie symulacji za pośrednictwem metody "startSimulation" 
 			model.startSimulation();
 
 		} catch (SimControlException e) {
