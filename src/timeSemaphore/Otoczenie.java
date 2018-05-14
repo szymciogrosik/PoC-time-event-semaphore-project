@@ -29,7 +29,7 @@ public class Otoczenie extends BasicSimObj {
 		return semaphore;
 	}
 
-	public void setSemaphore(TimeSimEventSemaphore semaphore) {
+	void setSemaphore(TimeSimEventSemaphore semaphore) {
 		this.semaphore = semaphore;
 	}
 }

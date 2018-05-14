@@ -4,12 +4,6 @@ import dissimlab.random.SimGenerator;
 import dissimlab.simcore.*;
 import dissimlab.simcore.SimParameters.SimDateField;
 
-/**
- * Description: Zdarzenie generatora zgłoszeń. Tworzy obiekt - zgłoszenie co losowy czas.
- * 
- * @author Dariusz Pierzchala
-
- */
 public class Zglaszaj extends BasicSimEvent<Otoczenie, Object>
 {
     private SimGenerator generator;
@@ -25,11 +19,11 @@ public class Zglaszaj extends BasicSimEvent<Otoczenie, Object>
 	protected void stateChange() throws SimControlException {
         parent = getSimObj();
 
-        // Tworze zdarzenie i wysyłam parent (Otoczenie) a tam już jest semafor, oraz dt dla danego zdarzenia.
 		double randomDt = generator.normal(5.0, 1.0);
 
 		Zdarzenie zdarzenie = null;
 
+		// Tworze zdarzenie i wysyłam parent (Otoczenie) a tam już jest semafor, oraz dt dla danego zdarzenia.
 		if(parent.getSemaphore().sizeList() == 0) {
 			zdarzenie = new Zdarzenie(parent, 10);
 		} else {

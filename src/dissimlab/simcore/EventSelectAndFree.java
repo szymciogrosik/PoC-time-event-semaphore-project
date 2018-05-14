@@ -2,18 +2,18 @@ package dissimlab.simcore;
 
 import timeSemaphore.Otoczenie;
 
-public class ZdarzenieWybierajace extends BasicSimEvent<Otoczenie, Object> {
+public class EventSelectAndFree extends BasicSimEvent<Otoczenie, Object> {
 
     private Otoczenie otoczenie;
     private static int nr = 0;
     private int tenNr;
 
-    public ZdarzenieWybierajace(Otoczenie otoczenie, double dt) throws SimControlException {
+    EventSelectAndFree(Otoczenie otoczenie, double dt) throws SimControlException {
         super(dt);
         this.otoczenie = otoczenie;
         this.setTenNr();
         this.setId(this.getTenNr());
-        otoczenie.getSemaphore().setZdarzenieWybierajace(this);
+        otoczenie.getSemaphore().setEventSelectAndFree(this);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class ZdarzenieWybierajace extends BasicSimEvent<Otoczenie, Object> {
 
         if(otoczenie.getSemaphore().sizeList() > 0) {
             double newRunTime = otoczenie.getSemaphore().getFirst().getRunTime() - SimManager.getInstance().getCommonSimContext().simTime();
-            new ZdarzenieWybierajace(otoczenie, newRunTime);
+            new EventSelectAndFree(otoczenie, newRunTime);
         }
     }
 
@@ -42,7 +42,7 @@ public class ZdarzenieWybierajace extends BasicSimEvent<Otoczenie, Object> {
         return null;
     }
 
-    public void setTenNr() {
+    private void setTenNr() {
         this.tenNr = nr++;
     }
 

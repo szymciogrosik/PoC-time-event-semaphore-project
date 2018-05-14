@@ -1,13 +1,5 @@
 package timeSemaphore;
 
-/**
- * @author Dariusz Pierzchala
- *
- * Description: Klasa główna. Tworzy dwa SMO, inicjalizuje je.Startuje symulację. Wyświetla statystyki.
- *
- * Wersja testowa.
- */
-
 import dissimlab.simcore.*;
 import dissimlab.simcore.SimParameters.SimControlStatus;
 

@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 public class TimeSimEventSemaphore extends SimEventSemaphore {
 
-    private ZdarzenieWybierajace zdarzenieWybierajace;
+    private EventSelectAndFree eventSelectAndFree;
     private Otoczenie parent;
 
     public TimeSimEventSemaphore(Otoczenie parent, String name) {
@@ -13,11 +13,11 @@ public class TimeSimEventSemaphore extends SimEventSemaphore {
         this.parent = parent;
     }
 
-    public BasicSimEvent<BasicSimObj, Object> getFirst() {
+    BasicSimEvent<BasicSimObj, Object> getFirst() {
         return this.getSimConditionalStChngList().getFirst();
     }
 
-    public BasicSimEvent<BasicSimObj, Object> removeFirst() {
+    BasicSimEvent<BasicSimObj, Object> removeFirst() {
         return this.getSimConditionalStChngList().removeFirst();
     }
 
@@ -25,31 +25,32 @@ public class TimeSimEventSemaphore extends SimEventSemaphore {
         return this.getSimConditionalStChngList().size();
     }
 
-    public void sortListDt() {
+    private void sortListDt() {
         this.getSimConditionalStChngList().sort(Comparator.comparingDouble(BasicSimEvent::getRunTime));
     }
 
-    public ZdarzenieWybierajace getZdarzenieWybierajace() {
-        return zdarzenieWybierajace;
+    private EventSelectAndFree getEventSelectAndFree() {
+        return eventSelectAndFree;
     }
 
-    public void setZdarzenieWybierajace(ZdarzenieWybierajace zdarzenieWybierajace) {
-        this.zdarzenieWybierajace = zdarzenieWybierajace;
+    void setEventSelectAndFree(EventSelectAndFree eventSelectAndFree) {
+        this.eventSelectAndFree = eventSelectAndFree;
     }
 
-    public void notifyAddNewEventToSemaphore(BasicSimEvent<Otoczenie, Object> zdarzenie) throws SimControlException {
+    public void notifyAddNewEventToSemaphore(BasicSimEvent<Otoczenie, Object> event) throws SimControlException {
         this.sortListDt();
-        //Jeżeli zgłoszenie które weszło jest pierwsze
+
+        //Jeżeli zgłoszenie które weszło jest jedyne w kolejce
         if(this.sizeList() == 1) {
-            new ZdarzenieWybierajace(parent, zdarzenie.getRunTime() - SimManager.getInstance().getCommonSimContext().simTime());
-        } else if(parent.getSemaphore().getFirst().getId() == this.getId() && parent.getSemaphore().sizeList() > 1) {
-            System.out.println("Przesunięto w czasie zdarzenie otwierające " + SimManager.getInstance().getCommonSimContext().getSimEventCalendar().readFirst().toString() + " do t: " + zdarzenie.getRunTime());
+            new EventSelectAndFree(parent, event.getRunTime() - SimManager.getInstance().getCommonSimContext().simTime());
+        } else if(this.sizeList() > 1 && this.getFirst().getId() == event.getId()) {
+            System.out.println("Przesunięto w czasie zdarzenie otwierające " + SimManager.getInstance().getCommonSimContext().getSimEventCalendar().readFirst().toString() + " do t: " + event.getRunTime());
 
             SimManager.getInstance()
                     .getCommonSimContext()
                     .getSimEventCalendar()
-                    .readObjectById(parent.getSemaphore().getZdarzenieWybierajace().getId())
-                    .reschedule(zdarzenie.getRunTime() - SimManager.getInstance().getCommonSimContext().simTime());
+                    .readObjectById(this.getEventSelectAndFree().getId())
+                    .reschedule(event.getRunTime() - SimManager.getInstance().getCommonSimContext().simTime());
         }
     }
 }
