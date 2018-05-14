@@ -91,7 +91,7 @@ public class SimEventSemaphore {
 		this.name = name;
 	}
 	
-	LinkedList<BasicSimEvent<BasicSimObj, Object>> getSimConditionalStChngList() {
+	public LinkedList<BasicSimEvent<BasicSimObj, Object>> getSimConditionalStChngList() {
 		return simEventList;
 	}
 
@@ -99,4 +99,6 @@ public class SimEventSemaphore {
 	public String toString() {
 		return name;
 	}
+
+
 }

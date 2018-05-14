@@ -1,5 +1,6 @@
 package dissimlab.simcore;
 
+import java.util.Optional;
 import java.util.PriorityQueue;
 
 /**
@@ -52,6 +53,14 @@ public class SimEventCalendar {
 
 	public int getSize() {
 		return simEventQueue.size();
+	}
+
+	public BasicSimEvent<BasicSimObj, Object> readObjectById(int idToFind) {
+		Optional<BasicSimEvent<BasicSimObj, Object>> objToReturn = null;
+
+		objToReturn = simEventQueue.stream().filter(obj -> obj.getId() == idToFind).findFirst();
+
+		return objToReturn.orElse(null);
 	}
 
 	public BasicSimEvent<BasicSimObj, Object> readFirst() {

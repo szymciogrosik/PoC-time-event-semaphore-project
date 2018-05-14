@@ -4,6 +4,7 @@ import dissimlab.broker.Dispatcher;
 import dissimlab.broker.INotificationEvent;
 import dissimlab.simcore.SimParameters.SimControlStatus;
 import dissimlab.simcore.SimParameters.SimEventStatus;
+import timeSemaphore.Otoczenie;
 
 /**
  * Description...
@@ -20,6 +21,8 @@ public abstract class BasicSimEvent<TSimObj extends BasicSimObj, TParams> implem
 	private TSimObj simObject = null;
 	protected TParams transitionParams = null;  
 	private boolean publishable = false;
+
+	private int id;
 
 	// Add immediately to common simObj in the default context for the whole model (when stateChange is very general/common to model) - without any "in" parameters 
 	// The same TO DO in the other cases
@@ -45,7 +48,7 @@ public abstract class BasicSimEvent<TSimObj extends BasicSimObj, TParams> implem
 		else
 			throw new SimControlException("Time duration must not be negative");	
 			//System.err.println("Time duration must not be negative");
-	}	
+	}
 
 	// Add immediately to common simObj in the default context for the whole model (when stateChange is very general/common to model) 
 	public BasicSimEvent(TParams params) throws SimControlException {
@@ -292,7 +295,10 @@ public abstract class BasicSimEvent<TSimObj extends BasicSimObj, TParams> implem
 		else
 			throw new SimControlException("Time period must not be negative");	
 	}
-	
+
+	public BasicSimEvent(int id, Otoczenie parent, TimeSimEventSemaphore semaphore) {
+	}
+
 	//Consider names: Run, Transform, Process, Alter, Realize
 	@SuppressWarnings("unchecked")
 	public void service() throws SimControlException {		
@@ -422,7 +428,7 @@ public abstract class BasicSimEvent<TSimObj extends BasicSimObj, TParams> implem
 		return runTime;
 	}
 
-	void setRunTime(double runSimTime) {
+	public void setRunTime(double runSimTime) {
 		this.runTime = runSimTime;
 	}
 
@@ -478,5 +484,13 @@ public abstract class BasicSimEvent<TSimObj extends BasicSimObj, TParams> implem
 	public String toString()
 	{
 		return this.getClass().getName().toString();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

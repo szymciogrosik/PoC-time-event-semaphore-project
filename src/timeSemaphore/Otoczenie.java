@@ -6,13 +6,11 @@ import dissimlab.simcore.BasicSimObj;
 import dissimlab.simcore.SimControlException;
 import dissimlab.simcore.TimeSimEventSemaphore;
 
-import java.util.concurrent.Semaphore;
-
 public class Otoczenie extends BasicSimObj {
     private TimeSimEventSemaphore semaphore;
 
     public Otoczenie() throws SimControlException {
-        // Powołanie instancji pierwszego zdarzenia
+        // Rozpocznij zgłaszanie Zdarzeń za semafor
     	new Zglaszaj(this, 0.0);
 	}
 

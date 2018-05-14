@@ -132,7 +132,7 @@ public class SimContext {
 		simModel.resumeSimulation();
 	}
 
-	double simTime() {
+	public double simTime() {
 		return simModel.simTime();
 	}
 
