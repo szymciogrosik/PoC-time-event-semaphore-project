@@ -9,9 +9,9 @@ public class AppSMO {
 			SimManager model = SimManager.getInstance();
 
 			// Utworzenie otoczenia
-			Otoczenie generatorZgl = new Otoczenie();
-			TimeSimEventSemaphore semaphore = new TimeSimEventSemaphore(generatorZgl, "Multisemafor czasowy.");
-			generatorZgl.setSemaphore(semaphore);
+			Otoczenie otoczenie = new Otoczenie();
+			TimeSimEventSemaphore semaphore = new TimeSimEventSemaphore("Multisemafor czasowy.");
+			otoczenie.setSemaphore(semaphore);
 
 			SimControlEvent stopEvent = new SimControlEvent(50, SimControlStatus.STOPSIMULATION);
 			model.startSimulation();

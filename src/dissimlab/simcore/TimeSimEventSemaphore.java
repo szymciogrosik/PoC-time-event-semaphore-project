@@ -6,11 +6,9 @@ import java.util.Comparator;
 public class TimeSimEventSemaphore extends SimEventSemaphore {
 
     private EventSelectAndFree eventSelectAndFree;
-    private Otoczenie parent;
 
-    public TimeSimEventSemaphore(Otoczenie parent, String name) {
+    public TimeSimEventSemaphore(String name) {
         super.setName(name);
-        this.parent = parent;
     }
 
     BasicSimEvent<BasicSimObj, Object> getFirst() {
@@ -42,7 +40,7 @@ public class TimeSimEventSemaphore extends SimEventSemaphore {
 
         //Jeżeli zgłoszenie które weszło jest jedyne w kolejce
         if(this.sizeList() == 1) {
-            new EventSelectAndFree(parent, event.getRunTime() - SimManager.getInstance().getCommonSimContext().simTime());
+            new EventSelectAndFree(this, event.getRunTime() - SimManager.getInstance().getCommonSimContext().simTime());
         } else if(this.sizeList() > 1 && this.getFirst().getId() == event.getId()) {
             System.out.println("Przesunięto w czasie zdarzenie otwierające " + SimManager.getInstance().getCommonSimContext().getSimEventCalendar().readFirst().toString() + " do t: " + event.getRunTime());
 

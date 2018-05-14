@@ -7,9 +7,8 @@ import dissimlab.simcore.SimParameters.SimDateField;
 public class Zglaszaj extends BasicSimEvent<Otoczenie, Object>
 {
     private SimGenerator generator;
-    private Otoczenie parent;
 
-    public Zglaszaj(Otoczenie parent, double delay) throws SimControlException
+	Zglaszaj(Otoczenie parent, double delay) throws SimControlException
     {
     	super(parent, delay);
     	generator = new SimGenerator();
@@ -17,7 +16,7 @@ public class Zglaszaj extends BasicSimEvent<Otoczenie, Object>
 
 	@Override
 	protected void stateChange() throws SimControlException {
-        parent = getSimObj();
+		Otoczenie parent = getSimObj();
 
 		double randomDt = generator.normal(5.0, 1.0);
 
