@@ -29,7 +29,7 @@ public class Zglaszaj extends BasicSimEvent<Otoczenie, Object>
 			zdarzenie = new Zdarzenie(parent, randomDt);
 		}
 
-		System.out.println(simTime()+" - "+simDate(SimDateField.HOUR24)+" - "+simDate(SimDateField.MINUTE)+" - "+simDate(SimDateField.SECOND)+" - "+simDate(SimDateField.MILLISECOND)+": Otoczenie - Utworzono nowe zgl. nr " + zdarzenie.getTenNr() + " Zdarzenie poinno zostać wyjęte zza semafora o: " + zdarzenie.getRunTime());
+		System.out.println(simTime()+" - "+simDate(SimDateField.HOUR24)+" - "+simDate(SimDateField.MINUTE)+" - "+simDate(SimDateField.SECOND)+" - "+simDate(SimDateField.MILLISECOND)+": Otoczenie - Utworzono nowe zgl. nr " + zdarzenie.getId() + " Zdarzenie poinno zostać wyjęte zza semafora o: " + zdarzenie.getRunTime());
 		System.out.println(simTime()+" - "+simDate(SimDateField.HOUR24)+" - "+simDate(SimDateField.MINUTE)+" - "+simDate(SimDateField.SECOND)+" - "+simDate(SimDateField.MILLISECOND)+": Otoczenie - Dodano zgloszenie za semafor. - Aktualnie w semaforze oczekujących: " + parent.getSemaphore().numberOfBlocked());
 
 		// Wygeneruj czas do kolejnego zgłoszenia

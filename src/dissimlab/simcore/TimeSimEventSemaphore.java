@@ -1,6 +1,5 @@
 package dissimlab.simcore;
 
-import timeSemaphore.Otoczenie;
 import java.util.Comparator;
 
 public class TimeSimEventSemaphore extends SimEventSemaphore {
@@ -35,7 +34,7 @@ public class TimeSimEventSemaphore extends SimEventSemaphore {
         this.eventSelectAndFree = eventSelectAndFree;
     }
 
-    public void notifyAddNewEventToSemaphore(BasicSimEvent<Otoczenie, Object> event) throws SimControlException {
+    public void notifyAddNewEventToSemaphore(BasicSimEvent<BasicSimObj, Object> event) throws SimControlException {
         this.sortListDt();
 
         //Jeżeli zgłoszenie które weszło jest jedyne w kolejce

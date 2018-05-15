@@ -2,14 +2,11 @@ package dissimlab.simcore;
 
 public class EventSelectAndFree extends BasicSimEvent<BasicSimObj, Object> {
 
-    private static int nr = 0;
-    private int tenNr;
     private TimeSimEventSemaphore semaphore;
 
     EventSelectAndFree(TimeSimEventSemaphore semaphore, double dt) throws SimControlException {
         super(dt);
-        this.setTenNr();
-        this.setId(this.getTenNr());
+        this.setId();
         this.semaphore = semaphore;
         semaphore.setEventSelectAndFree(this);
     }
@@ -38,13 +35,5 @@ public class EventSelectAndFree extends BasicSimEvent<BasicSimObj, Object> {
     @Override
     public Object getEventParams() {
         return null;
-    }
-
-    private void setTenNr() {
-        this.tenNr = nr++;
-    }
-
-    public int getTenNr() {
-        return tenNr;
     }
 }

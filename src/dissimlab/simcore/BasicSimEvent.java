@@ -23,6 +23,7 @@ public abstract class BasicSimEvent<TSimObj extends BasicSimObj, TParams> implem
 	private boolean publishable = false;
 
 	private int id;
+	private static int nr = 0;
 
 	// Add immediately to common simObj in the default context for the whole model (when stateChange is very general/common to model) - without any "in" parameters 
 	// The same TO DO in the other cases
@@ -188,21 +189,10 @@ public abstract class BasicSimEvent<TSimObj extends BasicSimObj, TParams> implem
 		else 
 			throw new SimControlException("SimConditionBarrier does not exist");		
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public BasicSimEvent(TSimObj entity, SimEventSemaphore barrier) throws SimControlException {
-		if (barrier != null){
-			this.simObject = entity;
-			this.simSemaphore = barrier;
-			// register "entity-statechange-params" in context and model
-			if (this.simObject!= null) {
-				this.simObject.createSimEvent((BasicSimEvent<BasicSimObj, Object>)this);
-			} 
-			else
-				throw new SimControlException("simObj does not exist");
-		} 
-		else 
-			throw new SimControlException("SimConditionBarrier does not exist");				
+
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -297,6 +287,25 @@ public abstract class BasicSimEvent<TSimObj extends BasicSimObj, TParams> implem
 	}
 
 	public BasicSimEvent(int id, Otoczenie parent, TimeSimEventSemaphore semaphore) {
+	}
+
+	public BasicSimEvent(double dt, TSimObj parent, TimeSimEventSemaphore semaphore) throws SimControlException {
+		if (semaphore != null){
+			this.simObject = parent;
+			this.simSemaphore = semaphore;
+			// register "entity-statechange-params" in context and model
+			if (this.simObject!= null) {
+				this.simObject.createSimEvent((BasicSimEvent<BasicSimObj, Object>)this);
+			}
+			else
+				throw new SimControlException("simObj does not exist");
+		}
+		else
+			throw new SimControlException("SimConditionBarrier does not exist");
+
+		setId();
+		this.setRunTime(simTime() + dt);
+		semaphore.notifyAddNewEventToSemaphore((BasicSimEvent<BasicSimObj, Object>)this);
 	}
 
 	//Consider names: Run, Transform, Process, Alter, Realize
@@ -490,7 +499,7 @@ public abstract class BasicSimEvent<TSimObj extends BasicSimObj, TParams> implem
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId() {
+		this.id = ++nr;
 	}
 }
