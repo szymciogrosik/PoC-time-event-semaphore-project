@@ -42,7 +42,7 @@ public class TimeSimEventSemaphore extends SimEventSemaphore {
         if(this.sizeList() == 1) {
             new EventSelectAndFree(this, event.getRunTime() - SimManager.getInstance().getCommonSimContext().simTime());
         } else if(this.sizeList() > 1 && this.getFirst().getId() == event.getId()) {
-            System.out.println("Przesunięto w czasie zdarzenie otwierające " + SimManager.getInstance().getCommonSimContext().getSimEventCalendar().readFirst().toString() + " do t: " + event.getRunTime());
+            System.out.println("Przesunięto w czasie zdarzenie otwierające " + "do t: " + event.getRunTime());
 
             SimManager.getInstance()
                     .getCommonSimContext()
