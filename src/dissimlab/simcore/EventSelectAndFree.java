@@ -29,7 +29,7 @@ public class EventSelectAndFree extends BasicSimEvent<BasicSimObj, Object> {
 
     @Override
     protected void onInterruption() {
-
+        System.out.println("Przerwano zdarzenie wybierajace");
     }
 
     @Override

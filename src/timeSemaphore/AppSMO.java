@@ -10,7 +10,7 @@ public class AppSMO {
 
 			// Utworzenie otoczenia
 			Otoczenie otoczenie = new Otoczenie();
-			TimeSimEventSemaphore semaphore = new TimeSimEventSemaphore("Multisemafor czasowy.");
+			TimeSimEventSemaphore semaphore = new TimeSimEventSemaphore("Multisemafor czasowy.", 25);
 			otoczenie.setSemaphore(semaphore);
 
 			SimControlEvent stopEvent = new SimControlEvent(50, SimControlStatus.STOPSIMULATION);

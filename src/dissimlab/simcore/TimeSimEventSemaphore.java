@@ -6,8 +6,9 @@ public class TimeSimEventSemaphore extends SimEventSemaphore {
 
     private EventSelectAndFree eventSelectAndFree;
 
-    public TimeSimEventSemaphore(String name) {
+    public TimeSimEventSemaphore(String name, long dt) throws SimControlException {
         super.setName(name);
+        new EventOpen(this, dt);
     }
 
     BasicSimEvent<BasicSimObj, Object> getFirst() {
@@ -49,5 +50,13 @@ public class TimeSimEventSemaphore extends SimEventSemaphore {
                     .readObjectById(this.getEventSelectAndFree().getId())
                     .reschedule(event.getRunTime() - SimManager.getInstance().getCommonSimContext().simTime());
         }
+    }
+
+    @Override
+    public void open() throws SimControlException {
+        while (!super.getSimConditionalStChngList().isEmpty()){
+            this.removeFirstState();
+        }
+        System.out.println("Czy przerwano zdarzenie wybierajace? " + eventSelectAndFree.interrupt());
     }
 }
