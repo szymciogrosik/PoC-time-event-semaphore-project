@@ -15,7 +15,6 @@ public class AppSMO {
 
 			SimControlEvent stopEvent = new SimControlEvent(50, SimControlStatus.STOPSIMULATION);
 			model.startSimulation();
-
 		} catch (SimControlException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
